@@ -6,22 +6,25 @@ import akka.actor.{Actor, ActorSystem, Props}
 
 case object StartZookeeper
 case object StartKafkaServer
+case object StartCassandra
 case object StartKafkaCassandra
 
 //Define Actors by extending Actor trait
 class KafkaActor extends Actor{
-  //Set the directory of Kafka
-  val kafkaDir="/home/tinhtb/WorkSpace/ITechSeeker/Tools/kafka_2.12-2.1.0/"
+  //Set the directory of Kafka and Cassandra
+  val kafkaDir="/home/itechseeker/WorkSpace/ITechSeeker/Tools/kafka_2.12-2.1.0"
+  val cassandraDir="/home/itechseeker/WorkSpace/ITechSeeker/Tools/apache-cassandra-3.11.4"
 
   //The command to run zookeeper, kakfka server and Kafka Cassandra Connector
   val zookeeperCmd="bin/zookeeper-server-start.sh config/zookeeper.properties"
   val serverCmd="bin/kafka-server-start.sh config/server.properties"
+  val cassandraCmd="bin/cassandra -f" //Run in foreground as it runs in background by default
   val kafkaCassandraCmd="bin/connect-standalone.sh config/connect-standalone.properties config/cassandra-sink.properties"
 
   //Implement cmdExecuter method to execute a command string
-  def cmdExecuter(cmd: String)={
+  def cmdExecuter(cmd: String, dir : String)={
     //using .exec() method to run the command
-    val process = Runtime.getRuntime().exec(cmd, null, new File(kafkaDir))
+    val process = Runtime.getRuntime().exec(cmd, null, new File(dir))
 
     //Print the output of the process
     val reader = new BufferedReader(new InputStreamReader(process.getInputStream))
@@ -41,19 +44,25 @@ class KafkaActor extends Actor{
     //Start Zookeeper
     case StartZookeeper => {
       println("\nStart Zookeeper...")
-      cmdExecuter(zookeeperCmd)
+      cmdExecuter(zookeeperCmd,kafkaDir)
     }
 
     //Start Kafka Server
     case StartKafkaServer => {
       println("\nStart Kafka Server...")
-      cmdExecuter(serverCmd)
+      cmdExecuter(serverCmd,kafkaDir)
+    }
+
+    //Start Cassandra
+    case StartCassandra => {
+      println("\nStart Cassandra ...")
+      cmdExecuter(cassandraCmd,cassandraDir)
     }
 
     //Start Kafka Cassandra Connector
     case StartKafkaCassandra => {
       println("\nStart Kafka Cassandra Connector...")
-      cmdExecuter(kafkaCassandraCmd)
+      cmdExecuter(kafkaCassandraCmd,kafkaDir)
     }
   }
 }
@@ -64,12 +73,13 @@ object KafkaRunner {
       //Creating an ActorSystem
       var actorSystem = ActorSystem("ActorSystem");
 
-      //Create 3 actors to perform three different jobs parallel
+      //Create 4 actors to perform four different jobs parallel
       //Because actors always work sequentially.
       //We cannot force an actor to process more than one message at a time
       val actor1 = actorSystem.actorOf(Props[KafkaActor])
       val actor2 = actorSystem.actorOf(Props[KafkaActor])
       val actor3 = actorSystem.actorOf(Props[KafkaActor])
+      val actor4 = actorSystem.actorOf(Props[KafkaActor])
 
       //Send message to each actor to ask them doing their job
       actor1 ! StartZookeeper
@@ -79,7 +89,10 @@ object KafkaRunner {
       actor2 ! StartKafkaServer
       Thread.sleep(10000)
 
-      actor3 ! StartKafkaCassandra
+      actor3 ! StartCassandra
+      Thread.sleep(5000)
+
+      actor4 ! StartKafkaCassandra
 
     }
   }

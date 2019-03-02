@@ -8,6 +8,7 @@ import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
 import twitter4j._
 import twitter4j.conf._
+import twitter4j.FilterQuery
 import net.liftweb.json.Serialization.write
 
 //Define Tweet class
@@ -19,14 +20,17 @@ object KafkaTwitterStreaming {
 
   def main(args: Array[String]): Unit = {
     //The Kafka Topic
-    val topicName = "Big Data"
+    val kafkaTopic = "TwitterStreaming1"
+
+    //List of Twitter search keywords
+    val searchKeywords=Array("Big Data","Data mining","Machine Learning","Deep Learning")
 
     //Define a Kafka Producer
     val producer = new KafkaProducer[String, String](getKafkaProp)
-    getStreamTweets(producer, topicName)
+    getStreamTweets(producer,kafkaTopic,searchKeywords )
   }
 
-  def getStreamTweets(producer: Producer[String, String], topicName: String): Unit = {
+  def getStreamTweets(producer: Producer[String, String],kafkaTopic:String, searchKeywords: Array[String]): Unit = {
     val twitterStream = new TwitterStreamFactory(getTwitterConf()).getInstance()
     val listener = new StatusListener() {
       override def onStatus(status: Status): Unit = {
@@ -36,7 +40,9 @@ object KafkaTwitterStreaming {
         var content=status.getText()
         val lang=status.getLang()
 
-        //
+
+        //Need to use getRetweetedStatus.getText() in the case of Re-Tweet to get
+        // the full content
         if (status.getRetweetedStatus != null)
               content=status.getRetweetedStatus.getText
 
@@ -49,7 +55,7 @@ object KafkaTwitterStreaming {
             val message = write(Tweet(tweet_id,created_date,content))
 
 
-            val data = new ProducerRecord[String, String]("TwitterStreaming1", message)
+            val data = new ProducerRecord[String, String](kafkaTopic, message)
             System.out.println(message)
 
             //Send data
@@ -85,8 +91,9 @@ object KafkaTwitterStreaming {
     }
     twitterStream.addListener(listener)
 
-    //Get Twitter stream about a topic
-    twitterStream.filter(topicName)
+    //Get tweet that contain a keyword in the list searchKeywords
+    val query = new FilterQuery().track(searchKeywords:_*)
+    twitterStream.filter(query)
   }
 
 

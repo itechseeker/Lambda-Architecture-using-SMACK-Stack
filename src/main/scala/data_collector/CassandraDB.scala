@@ -1,6 +1,6 @@
 package data_collector
 
-import com.datastax.driver.core.Cluster
+import com.datastax.driver.core.{Cluster, ResultSet, Row}
 
 
 object CassandraDB {
@@ -19,7 +19,7 @@ object CassandraDB {
     session = cluster.connect("lambda_architecture")
 
     //Create master_dataset table
-    query = "CREATE TABLE master_dataset(tweet_id bigint PRIMARY KEY, created_date bigint,content text);"
+    query = "CREATE TABLE IF NOT EXISTS master_dataset(tweet_id bigint PRIMARY KEY, created_date bigint,content text);"
     session.execute(query)
 
   }
