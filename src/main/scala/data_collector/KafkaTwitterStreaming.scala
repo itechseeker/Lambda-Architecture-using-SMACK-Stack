@@ -13,8 +13,13 @@ import net.liftweb.json.Serialization.write
 
 //Define Tweet class
 case class Tweet(tweet_id:Long,
-                 created_date:Long,
-                 content: String)
+                 user_id:Long,
+                 user_name: String,
+                 user_loc: String,
+                 content: String,
+                 hashtag: String,
+                 created_date:Long
+                 )
 
 object KafkaTwitterStreaming {
 
@@ -39,21 +44,23 @@ object KafkaTwitterStreaming {
         val created_date=status.getCreatedAt.getTime
         var content=status.getText()
         val lang=status.getLang()
+        val user=status.getUser()
+        var hashtag=""
 
+        for(h_tag <- status.getHashtagEntities)
+             hashtag=hashtag+", "+ h_tag.getText
 
         //Need to use getRetweetedStatus.getText() in the case of Re-Tweet to get
         // the full content
         if (status.getRetweetedStatus != null)
               content=status.getRetweetedStatus.getText
 
-
         //Only collect English tweets
         if(lang.equals("en"))
           {
             //Convert Tweet object to Json using Lift-JSON library
             implicit val formats = DefaultFormats
-            val message = write(Tweet(tweet_id,created_date,content))
-
+            val message = write(Tweet(tweet_id,user.getId,user.getName,user.getLocation,content,hashtag,created_date))
 
             val data = new ProducerRecord[String, String](kafkaTopic, message)
             System.out.println(message)

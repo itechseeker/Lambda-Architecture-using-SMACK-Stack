@@ -9,7 +9,7 @@ case object StartKafkaServer
 case object StartCassandra
 case object StartKafkaCassandra
 
-//Define Actors by extending Actor trait
+//Define Kafka actor
 class KafkaActor extends Actor{
   //Set the directory of Kafka and Cassandra
   val kafkaDir="/home/itechseeker/WorkSpace/ITechSeeker/Tools/kafka_2.12-2.1.0"
@@ -71,7 +71,7 @@ object KafkaRunner {
   def main(args: Array[String]): Unit = {
     {
       //Creating an ActorSystem
-      var actorSystem = ActorSystem("ActorSystem");
+      val actorSystem = ActorSystem("ActorSystem");
 
       //Create 4 actors to perform four different jobs parallel
       //Because actors always work sequentially.
