@@ -66,10 +66,6 @@ class BatchProcessingSpark{
     println("The most ten popular hashtags: ")
     hashtagCount.show(10)
 
-    /*   hashtagCount.write.format("org.apache.spark.sql.cassandra")
-         .options(Map("table" -> "hashtag_batchView", "keyspace" -> "lambda_architecture"))
-         .mode(saveMode = "Append").save()*/
-
     //Connect Spark to Cassandra and execute CQL statements from Spark applications
     val connector = CassandraConnector(sparkContext.getConf)
 

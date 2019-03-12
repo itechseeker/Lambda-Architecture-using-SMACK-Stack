@@ -46,9 +46,21 @@ object KafkaTwitterStreaming {
         val lang=status.getLang()
         val user=status.getUser()
         var hashtag=""
+        println(status.getHashtagEntities().toString)
 
+        //Get a string contains all hashtag
+        var first=true
         for(h_tag <- status.getHashtagEntities)
-             hashtag=hashtag+", "+ h_tag.getText
+          {
+            if(first)
+              {
+                hashtag=h_tag.getText
+                first=false
+              }
+            else hashtag=hashtag+", "+ h_tag.getText
+
+          }
+
 
         //Need to use getRetweetedStatus.getText() in the case of Re-Tweet to get
         // the full content

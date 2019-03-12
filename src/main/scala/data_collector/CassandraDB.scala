@@ -5,7 +5,7 @@ import com.datastax.driver.core.{Cluster, ResultSet, Row}
 
 object CassandraDB {
 
-  def main(args: Array[String]): Unit = {
+  def runDB(): Unit = {
     //creating Cluster object
     val cluster = Cluster.builder.addContactPoint("127.0.0.1").build
     //Creating Session object

@@ -3,6 +3,9 @@ package speed_layer
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{LongType, StringType, StructField, StructType}
 import org.apache.spark.sql.functions.{desc, from_json, lower}
+import scala.concurrent.duration._
+import org.apache.spark.sql.streaming.{OutputMode, Trigger}
+
 
 object RealtimeProcessor {
   def main(args: Array[String]): Unit = {
@@ -60,16 +63,31 @@ object RealtimeProcessor {
     var hashtag_indv=hashtag_df.as[String].flatMap(_.split(", ")).filter($"value".notEqual(""))
 
     //Count the occurance of each hashtag
-    val hashtagCount=hashtag_indv.groupBy("value").count().sort(desc("count"))
+    //Rename value column to hashtag
+    val hashtagCount=hashtag_indv.groupBy("value").count().sort(desc("count")).withColumnRenamed("value","hashtag")
 
-    // Display output (all columns)
+
+    // Display output to console
     val query = hashtagCount
       .writeStream
       .outputMode("complete")
       .format("console")
       .start()
 
+    //Saving data to hashtag_realtimeview table using foreachBatch
+    val query_cassandra = hashtagCount.writeStream
+      .foreachBatch((batchDF, batchId) =>
+        batchDF.write
+          .format("org.apache.spark.sql.cassandra")
+          .mode("Append")
+          .options(Map("table" -> "hashtag_realtimeview", "keyspace" -> "lambda_architecture"))
+          .save())
+      .outputMode("complete")
+      .trigger(Trigger.ProcessingTime(30 seconds))
+      .start()
+
     query.awaitTermination()
+    query_cassandra.awaitTermination()
 
   }
 

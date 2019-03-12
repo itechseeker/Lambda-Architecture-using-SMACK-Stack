@@ -15,7 +15,7 @@ class KafkaActor extends Actor{
   val kafkaDir="/home/itechseeker/WorkSpace/ITechSeeker/Tools/kafka_2.12-2.1.0"
   val cassandraDir="/home/itechseeker/WorkSpace/ITechSeeker/Tools/apache-cassandra-3.11.4"
 
-  //The command to run zookeeper, kakfka server and Kafka Cassandra Connector
+  //The command to run zookeeper, kafka server and Kafka Cassandra Connector
   val zookeeperCmd="bin/zookeeper-server-start.sh config/zookeeper.properties"
   val serverCmd="bin/kafka-server-start.sh config/server.properties"
   val cassandraCmd="bin/cassandra -f" //Run in foreground as it runs in background by default
@@ -68,7 +68,7 @@ class KafkaActor extends Actor{
 }
 
 object KafkaRunner {
-  def main(args: Array[String]): Unit = {
+  def start(): Unit = {
     {
       //Creating an ActorSystem
       val actorSystem = ActorSystem("ActorSystem");
