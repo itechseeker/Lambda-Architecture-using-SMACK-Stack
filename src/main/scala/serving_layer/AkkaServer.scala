@@ -9,9 +9,9 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import com.datastax.driver.core.Cluster
 import spray.json.DefaultJsonProtocol._
-import spray.json._
 import scala.io.StdIn
-import scala.concurrent.Future
+import scala.collection.JavaConversions._
+
 
 object AkkaServer {
 
@@ -25,14 +25,28 @@ object AkkaServer {
   val cluster = Cluster.builder.addContactPoint("127.0.0.1").build()
 
   //Connect to the lambda_architecture keyspace
-  val cassandraConn = cluster.connect("testkeyspace")
+  val cassandraConn = cluster.connect("lambda_architecture")
 
 
-  //Define Employee class
-  case class Employee(emp_id:Long, emp_name: String,emp_city: String, emp_phone: Long,emp_sal: Long)
+  //Define Hashtag class
+  case class Hashtag(value: String, var count: Long){
+
+    // Set new value for count variable
+    def setCount(newValue:Long)={
+      count=newValue
+    }
+
+    // Override the equals method to use List contains() method
+    override def equals(otherObj: Any): Boolean =
+      otherObj match {
+        case otherObj: Hashtag => (otherObj.value).equals(this.value)
+        case _ => false
+      }
+  }
+
   //Formats for unmarshalling and marshalling
-  //Using jsonFormat5 as Employee has 5 input parameters
-  implicit val empFormat = jsonFormat5(Employee)
+  //Using jsonFormat2 as Hashtag has 2 input parameters
+  implicit val empFormat = jsonFormat2(Hashtag)
 
   def main(args: Array[String]) {
 
@@ -40,7 +54,7 @@ object AkkaServer {
     val route: Route =
       get {
         path("getAll" ) {
-          complete( cassandraReader("select JSON * from emp")   )
+          complete( getViews()   )
         }
       }
     //Binding to the host and port
@@ -59,28 +73,41 @@ object AkkaServer {
 
 
   /**
-    * Read the Cassandra Data and convert each Row to Employee object
-    * @param query the query to execute
-    * @return the list of Employee
+    * Combine the hashtag of both batch view and realtime view
+    * @return a list of Hashtag
     */
-  def cassandraReader(query: String):List[Employee] = {
-    var empList:List[Employee] = Nil
+  def getViews():List[Hashtag] = {
+    var hashtagList:List[Hashtag] = Nil
 
-    //Get the result set from query execution
-    val resultSet= cassandraConn.execute(query)
+    //Get the batchview
+    val batchViewResult= cassandraConn.execute("select * from hashtag_batchview").all().toList
 
-    //Get the iterator of the result set
-    val it=resultSet.iterator()
-    while(it.hasNext)
-    {
-      //Convert each row of json data to Employee object
-      val jsonString=resultSet.one().getString(0)
-      val jsonObj=jsonString.parseJson.convertTo[Employee]
-
-      //Add to empList
-      empList=  jsonObj :: empList
+    // Convert each row to the Hashtag object
+    batchViewResult.map { row =>
+      // add the hashtag to the list
+      hashtagList = Hashtag(row.getString("value"), row.getLong("count"))::hashtagList
     }
 
-    return empList
+    //Get the realtimeview
+    val realtimeViewResult= cassandraConn.execute("select * from hashtag_realtimeview").all().toList
+
+    // Convert each row to the Hashtag object
+    realtimeViewResult.map { row =>
+      val newHashtag=new Hashtag(row.getString("hashtag"), row.getInt("count"))
+
+      // Increase the count if the hashtag is already in the batch view
+      if(hashtagList.contains(newHashtag))
+      {
+        val oldHash=hashtagList(hashtagList.indexOf(newHashtag))
+        oldHash.setCount(oldHash.count+newHashtag.count)
+      }
+      else
+        hashtagList=newHashtag :: hashtagList // add the the list if the hashtag is not in the batch view
+    }
+
+    // sort the list of hashtag by its count
+    hashtagList=hashtagList.sortBy(row => row.count).reverse
+
+    return hashtagList
   }
 }

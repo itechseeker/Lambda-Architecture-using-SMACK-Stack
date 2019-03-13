@@ -1,5 +1,7 @@
 package main_package;
 
+import com.google.gson.Gson;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +13,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static sun.awt.X11.XConstants.Success;
+
+class Hashtag {
+    String value;
+    long count;
+}
 
 
 public class ClientUI {
@@ -23,18 +29,16 @@ public class ClientUI {
 
     public ClientUI() {
 
-        String[] columnNames = {"Hashtag", "Count"};
-        Object[][] data =
-                {
-                        {"hello", "BACK"},
-                        {"big", "EXIT"},
-                        {"data", "FORWARD"},
-                };
+        // Name of table's column
+        final String[] columnNames = {"Hashtag", "Count"};
 
-        //Add data to the table
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+        // Define table model
+        final DefaultTableModel tableModel = new DefaultTableModel(new Object[15][], columnNames);
         hashtagTable.setModel(tableModel);
         hashtagTable.setRowHeight(25);
+
+        // Set font for the table text
+        hashtagTable.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
         //Set Table header to be center
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)hashtagTable.getTableHeader().getDefaultRenderer();
@@ -51,58 +55,57 @@ public class ClientUI {
         //Update data when click the button
         topHashTagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                //JOptionPane.showMessageDialog(null,"Hello");
-                //DefaultTableModel tableUpdate= (DefaultTableModel) hashtagTable.getModel();
-                String[] columnNames = {"Hashtag", "Count"};
-                Object[][] data =
-                        {
-                                {"hello1", "BACK"},
-                                {"big1", "EXIT"},
-                                {"data1", "FORWARD"},
-                        };
-
-                DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-
-
-                hashtagTable.setModel(tableModel);
-
-
-                /*String url = "http://localhost:8080/getAll";
-                HttpURLConnection con = null;
-                try {
-
-                    URL myurl = new URL(url);
-                    con = (HttpURLConnection) myurl.openConnection();
-
-                    con.setRequestMethod("GET");
-
-                    StringBuilder content;
-
-                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                        String line;
-                        content = new StringBuilder();
-
-                        while ((line = in.readLine()) != null) {
-                            content.append(line);
-                            content.append("\n");
-                        }
-
-
-                    System.out.println(content.toString());
-
-                }  catch (Exception e) {
-                    e.printStackTrace();
+                //DefaultTableModel tableModel = new DefaultTableModel(new Object[10][2], columnNames);
+                // Get the hashtag array
+                Hashtag[] hashtags=getData("http://localhost:8080/getAll");
+                tableModel.setRowCount(0);
+                for(int i=0;i<hashtags.length;i++)
+                {
+                    tableModel.addRow(new Object[]{hashtags[i].value,hashtags[i].count});
                 }
-
-                finally {
-
-                    con.disconnect();
-                }*/
+                tableModel.fireTableDataChanged();
 
             }
         });
     }
+
+    public Hashtag[] getData(String urlString)
+    {
+        HttpURLConnection connection = null;
+        Hashtag[] hashtags = new Hashtag[0];
+        try {
+
+            // Create connection
+            URL url = new URL(urlString);
+            connection = (HttpURLConnection) url.openConnection();
+
+            // Set GET request
+            connection.setRequestMethod("GET");
+
+            // Read the response data
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            String line;
+            StringBuilder content= new StringBuilder();
+
+            while ((line = in.readLine()) != null) {
+                content.append(line);
+                content.append("\n");
+            }
+
+            //Convert json String to Hashtag object
+            Gson gson=new Gson();
+            hashtags=gson.fromJson(content.toString(),Hashtag[].class);
+
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            connection.disconnect();
+        }
+        return hashtags;
+
+    }
+
 
     public static void main(String[] args) {
 
