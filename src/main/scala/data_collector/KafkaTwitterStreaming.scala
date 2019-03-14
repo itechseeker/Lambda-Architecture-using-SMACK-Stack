@@ -2,6 +2,7 @@ package data_collector
 
 import java.util.Properties
 
+import main_package.AppConfiguration
 import net.liftweb.json.DefaultFormats
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.KafkaProducer
@@ -10,6 +11,7 @@ import twitter4j._
 import twitter4j.conf._
 import twitter4j.FilterQuery
 import net.liftweb.json.Serialization.write
+
 
 //Define Tweet class
 case class Tweet(tweet_id:Long,
@@ -25,17 +27,17 @@ object KafkaTwitterStreaming {
 
   def main(args: Array[String]): Unit = {
     //The Kafka Topic
-    val kafkaTopic = "TwitterStreaming1"
+    val kafkaTopic = AppConfiguration.kafkaTopic
 
     //List of Twitter search keywords
-    val searchKeywords=Array("Big Data","Data mining","Machine Learning","Deep Learning")
+    val searchKeywords=AppConfiguration.kafkaKeywords
 
     //Define a Kafka Producer
     val producer = new KafkaProducer[String, String](getKafkaProp)
     getStreamTweets(producer,kafkaTopic,searchKeywords )
   }
 
-  def getStreamTweets(producer: Producer[String, String],kafkaTopic:String, searchKeywords: Array[String]): Unit = {
+  def getStreamTweets(producer: Producer[String, String],kafkaTopic:String, searchKeywords: List[String]): Unit = {
     val twitterStream = new TwitterStreamFactory(getTwitterConf()).getInstance()
     val listener = new StatusListener() {
       override def onStatus(status: Status): Unit = {
@@ -45,22 +47,9 @@ object KafkaTwitterStreaming {
         var content=status.getText()
         val lang=status.getLang()
         val user=status.getUser()
-        var hashtag=""
-        println(status.getHashtagEntities().toString)
 
-        //Get a string contains all hashtag
-        var first=true
-        for(h_tag <- status.getHashtagEntities)
-          {
-            if(first)
-              {
-                hashtag=h_tag.getText
-                first=false
-              }
-            else hashtag=hashtag+", "+ h_tag.getText
-
-          }
-
+        // Convert a list of HashTagEntity to String seperated by ", "
+        val hashtag=status.getHashtagEntities().toList.map(_.getText).mkString(", ")
 
         //Need to use getRetweetedStatus.getText() in the case of Re-Tweet to get
         // the full content
@@ -146,10 +135,10 @@ object KafkaTwitterStreaming {
     val cb = new ConfigurationBuilder()
     cb.setDebugEnabled(true)
       .setJSONStoreEnabled(true)
-      .setOAuthConsumerKey("Fljmu9Wp1YVNXhqfmDHDyEAz9")
-      .setOAuthConsumerSecret("7CZDMiqhaeV7FOsUTYLgi9utt4eYEVaxqVuKZj5VGHLYqO0mLU")
-      .setOAuthAccessToken("1060702756430729216-1L9lL05TdEbanhGDFETkKMknmbw70w")
-      .setOAuthAccessTokenSecret("Qu41ydcAzTxClfVW4BMU6UjziS6Lv9Kkwz1zBXKh3JWrx")
+      .setOAuthConsumerKey(AppConfiguration.consumerKey)
+      .setOAuthConsumerSecret(AppConfiguration.consumerSecret)
+      .setOAuthAccessToken(AppConfiguration.accessToken)
+      .setOAuthAccessTokenSecret(AppConfiguration.accessTokenSecret)
     return cb.build()
   }
 

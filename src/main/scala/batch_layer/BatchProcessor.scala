@@ -62,7 +62,7 @@ class BatchProcessingSpark{
     hashtag_indv.show(10)
 
     //Count the occurance of each hashtag
-    val hashtagCount=hashtag_indv.groupBy("value").count().sort(desc("count"))
+    val hashtagCount=hashtag_indv.groupBy("value").count().sort(desc("count")).withColumnRenamed("value","hashtag")
     println("The most ten popular hashtags: ")
     hashtagCount.show(10)
 

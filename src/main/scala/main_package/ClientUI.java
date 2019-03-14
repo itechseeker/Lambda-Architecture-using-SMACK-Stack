@@ -13,10 +13,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+// Define Hashtag Class
 class Hashtag {
     String value;
-    long count;
+    int count;
 }
 
 
@@ -33,12 +33,14 @@ public class ClientUI {
         final String[] columnNames = {"Hashtag", "Count"};
 
         // Define table model
-        final DefaultTableModel tableModel = new DefaultTableModel(new Object[15][], columnNames);
+        final DefaultTableModel tableModel = new DefaultTableModel(new Object[20][], columnNames);
         hashtagTable.setModel(tableModel);
-        hashtagTable.setRowHeight(25);
+        hashtagTable.setRowHeight(30);
 
-        // Set font for the table text
+        // Set font for elements
         hashtagTable.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        topHashTagButton.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        hashtagTable.getTableHeader().setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
         //Set Table header to be center
         DefaultTableCellRenderer renderer = (DefaultTableCellRenderer)hashtagTable.getTableHeader().getDefaultRenderer();
@@ -121,9 +123,10 @@ public class ClientUI {
         frame.setContentPane(new ClientUI().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
         //Set size and location of the frame
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setSize(500,500);
+        frame.setSize(700,700);
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
         frame.setVisible(true);

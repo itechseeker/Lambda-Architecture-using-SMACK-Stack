@@ -3,7 +3,6 @@ package serving_layer
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import akka.Done
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
@@ -29,20 +28,7 @@ object AkkaServer {
 
 
   //Define Hashtag class
-  case class Hashtag(value: String, var count: Long){
-
-    // Set new value for count variable
-    def setCount(newValue:Long)={
-      count=newValue
-    }
-
-    // Override the equals method to use List contains() method
-    override def equals(otherObj: Any): Boolean =
-      otherObj match {
-        case otherObj: Hashtag => (otherObj.value).equals(this.value)
-        case _ => false
-      }
-  }
+  case class Hashtag(value: String, count: Long)
 
   //Formats for unmarshalling and marshalling
   //Using jsonFormat2 as Hashtag has 2 input parameters
@@ -85,7 +71,7 @@ object AkkaServer {
     // Convert each row to the Hashtag object
     batchViewResult.map { row =>
       // add the hashtag to the list
-      hashtagList = Hashtag(row.getString("value"), row.getLong("count"))::hashtagList
+      hashtagList = Hashtag(row.getString("hashtag"), row.getLong("count"))::hashtagList
     }
 
     //Get the realtimeview
@@ -93,21 +79,17 @@ object AkkaServer {
 
     // Convert each row to the Hashtag object
     realtimeViewResult.map { row =>
-      val newHashtag=new Hashtag(row.getString("hashtag"), row.getInt("count"))
-
-      // Increase the count if the hashtag is already in the batch view
-      if(hashtagList.contains(newHashtag))
-      {
-        val oldHash=hashtagList(hashtagList.indexOf(newHashtag))
-        oldHash.setCount(oldHash.count+newHashtag.count)
-      }
-      else
-        hashtagList=newHashtag :: hashtagList // add the the list if the hashtag is not in the batch view
+      // add the hashtag to the list
+      hashtagList = Hashtag(row.getString("hashtag"), row.getInt("count"))::hashtagList
     }
 
-    // sort the list of hashtag by its count
-    hashtagList=hashtagList.sortBy(row => row.count).reverse
+    // Group the Hashtag object that have the same value and sum their count
+    var finalList=hashtagList.groupBy(_.value).map(el => Hashtag(el._1,el._2.map(_.count).sum)).toList
 
-    return hashtagList
+    // sort the list of hashtag by its count
+    finalList=finalList.sortBy(row => row.count).reverse
+
+
+    return finalList
   }
 }
