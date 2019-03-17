@@ -1,13 +1,12 @@
 package speed_layer
 
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.Actor
 import com.datastax.spark.connector.cql.CassandraConnector
 import main_package.AppConfiguration
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types.{LongType, StringType, StructField, StructType}
 import org.apache.spark.sql.functions.{desc, from_json, lower}
-import scala.concurrent.duration._
-import org.apache.spark.sql.streaming.{StreamingQuery, Trigger}
+import org.apache.spark.sql.streaming.StreamingQuery
 
 class RealtimeProcessingSpark{
   //Define a Spark session
@@ -36,11 +35,11 @@ class RealtimeProcessingSpark{
   )
   // Define the query that is currently running
   var activeQuery:StreamingQuery=null
+  //Connect Spark to Cassandra
+  val connector = CassandraConnector(spark.sparkContext.getConf)
 
   def restartQuery()={
-
-    //Connect Spark to Cassandra to remove all existing data from hashtag_realtimeview table
-    val connector = CassandraConnector(spark.sparkContext.getConf)
+    // Remove all existing data from hashtag_realtimeview table
     connector.withSessionDo(session => session.execute("TRUNCATE lambda_architecture.hashtag_realtimeview"))
 
     // Create a query if it is not exist
@@ -104,23 +103,5 @@ class RealtimeProcessingActor(spark_realtimeProc: RealtimeProcessingSpark) exten
       println("\nRestart hashtag realtime processing...")
       spark_realtimeProc.restartQuery()
     }
-  }
-
-}
-object Runner {
-  def main(args: Array[String]): Unit = {
-    //Creating an ActorSystem
-    val actorSystem = ActorSystem("ActorSystem");
-
-    //Create realtime processing actor
-    val realtimeActor = actorSystem.actorOf(Props(new RealtimeProcessingActor(new RealtimeProcessingSpark)))
-
-    //Using akka scheduler to run the batch processing periodically
-    import actorSystem.dispatcher
-    val initialDelay = 100 milliseconds
-    val batchInterval= 3 minutes
-
-    actorSystem.scheduler.schedule(initialDelay,batchInterval,realtimeActor,StartProcessing)
-
   }
 }

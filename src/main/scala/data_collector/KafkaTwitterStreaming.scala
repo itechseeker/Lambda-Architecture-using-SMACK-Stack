@@ -11,7 +11,6 @@ import twitter4j.conf._
 import twitter4j.FilterQuery
 import net.liftweb.json.Serialization.write
 
-
 //Define Tweet class
 case class Tweet(tweet_id:Long,
                  user_id:Long,
@@ -61,39 +60,28 @@ object KafkaTwitterStreaming {
             //Convert Tweet object to Json using Lift-JSON library
             implicit val formats = DefaultFormats
             val message = write(Tweet(tweet_id,user.getId,user.getName,user.getLocation,content,hashtag,created_date))
+            //System.out.println(message)
 
+            //Send data to a Kafka topic
             val data = new ProducerRecord[String, String](kafkaTopic, message)
-            System.out.println(message)
-
-            //Send data
             producer.send(data)
           }
       }
 
-      override
-
-      def onException(ex: Exception): Unit = {
+      override def onException(ex: Exception): Unit = {
         ex.printStackTrace()
       }
 
-      override
-
-      def onDeletionNotice(statusDeletionNotice: StatusDeletionNotice): Unit = {
+      override def onDeletionNotice(statusDeletionNotice: StatusDeletionNotice): Unit = {
       }
 
-      override
-
-      def onTrackLimitationNotice(numberOfLimitedStatuses: Int): Unit = {
+      override def onTrackLimitationNotice(numberOfLimitedStatuses: Int): Unit = {
       }
 
-      override
-
-      def onScrubGeo(userId: Long, upToStatusId: Long): Unit = {
+      override def onScrubGeo(userId: Long, upToStatusId: Long): Unit = {
       }
 
-      override
-
-      def onStallWarning(warning: StallWarning): Unit = {
+      override def onStallWarning(warning: StallWarning): Unit = {
       }
     }
     twitterStream.addListener(listener)
@@ -138,5 +126,4 @@ object KafkaTwitterStreaming {
       .setOAuthAccessTokenSecret(AppConfiguration.accessTokenSecret)
     return cb.build()
   }
-
 }

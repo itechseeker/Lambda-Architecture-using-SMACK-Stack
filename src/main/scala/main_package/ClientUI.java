@@ -1,7 +1,6 @@
 package main_package;
 
 import com.google.gson.Gson;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +18,6 @@ class Hashtag {
     int count;
 }
 
-
 public class ClientUI {
     private JPanel mainPanel;
     private JPanel rightPanel;
@@ -28,8 +26,7 @@ public class ClientUI {
     private JTable hashtagTable;
 
     public ClientUI() {
-
-        // Name of table's column
+        // Set name for table's columns
         final String[] columnNames = {"Hashtag", "Count"};
 
         // Define table model
@@ -57,9 +54,8 @@ public class ClientUI {
         //Update data when click the button
         topHashTagButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                //DefaultTableModel tableModel = new DefaultTableModel(new Object[10][2], columnNames);
                 // Get the hashtag array
-                Hashtag[] hashtags=getData("http://localhost:8080/getAll");
+                Hashtag[] hashtags=getData("http://localhost:8080/getHashtagCount");
                 tableModel.setRowCount(0);
                 for(int i=0;i<hashtags.length;i++)
                 {
@@ -77,7 +73,7 @@ public class ClientUI {
         Hashtag[] hashtags = new Hashtag[0];
         try {
 
-            // Create connection
+            // Create a connection
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
 

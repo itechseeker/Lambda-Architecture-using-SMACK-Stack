@@ -11,38 +11,33 @@ import spray.json.DefaultJsonProtocol._
 import scala.io.StdIn
 import scala.collection.JavaConversions._
 
-
 object AkkaServer {
-
-  // To run the route
+  // Define implicit variables
   implicit val system = ActorSystem()
   implicit val materializer = ActorMaterializer()
-  // Used for Future flatMap/onComplete/Done
   implicit val executionContext = system.dispatcher
 
   //creating Cluster object
-  val cluster = Cluster.builder.addContactPoint("127.0.0.1").build()
+  val cluster = Cluster.builder.addContactPoint("localhost").build()
 
   //Connect to the lambda_architecture keyspace
   val cassandraConn = cluster.connect("lambda_architecture")
 
-
   //Define Hashtag class
-  case class Hashtag(value: String, count: Long)
+  case class Hashtag(value: String, count: Int)
 
   //Formats for unmarshalling and marshalling
-  //Using jsonFormat2 as Hashtag has 2 input parameters
   implicit val empFormat = jsonFormat2(Hashtag)
 
-  def main(args: Array[String]) {
-
-    //Define a route with Get and POST
+  def start() {
+    //Define a route with GET
     val route: Route =
       get {
-        path("getAll" ) {
-          complete( getViews()   )
+        path("getHashtagCount" ) {
+          complete(getViews())
         }
       }
+
     //Binding to the host and port
     val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
     println(s"Server online at http://localhost:8080/\nPress Enter to stop...")
@@ -57,7 +52,6 @@ object AkkaServer {
 
   }
 
-
   /**
     * Combine the hashtag of both batch view and realtime view
     * @return a list of Hashtag
@@ -68,27 +62,24 @@ object AkkaServer {
     //Get the batchview
     val batchViewResult= cassandraConn.execute("select * from hashtag_batchview").all().toList
 
-    // Convert each row to the Hashtag object
+    // Convert each row to the Hashtag object and add to the hashtagList
     batchViewResult.map { row =>
-      // add the hashtag to the list
-      hashtagList = Hashtag(row.getString("hashtag"), row.getLong("count"))::hashtagList
+      hashtagList = Hashtag(row.getString("hashtag"), row.getInt("count"))::hashtagList
     }
 
     //Get the realtimeview
     val realtimeViewResult= cassandraConn.execute("select * from hashtag_realtimeview").all().toList
 
-    // Convert each row to the Hashtag object
+    // Convert each row to the Hashtag object and add to the hashtagList
     realtimeViewResult.map { row =>
-      // add the hashtag to the list
       hashtagList = Hashtag(row.getString("hashtag"), row.getInt("count"))::hashtagList
     }
 
     // Group the Hashtag object that have the same value and sum their count
     var finalList=hashtagList.groupBy(_.value).map(el => Hashtag(el._1,el._2.map(_.count).sum)).toList
 
-    // sort the list of hashtag by its count
+    // Sort the list of hashtag by its count in descending order
     finalList=finalList.sortBy(row => row.count).reverse
-
 
     return finalList
   }

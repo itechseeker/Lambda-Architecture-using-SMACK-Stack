@@ -6,18 +6,18 @@ object CassandraDB {
 
   def runDB(): Unit = {
     //creating Cluster object
-    val cluster = Cluster.builder.addContactPoint("127.0.0.1").build
+    val cluster = Cluster.builder.addContactPoint("localhost").build
     //Creating Session object
     var session = cluster.connect
     var query=""
 
-    query = "DROP KEYSPACE lambda_architecture;"
-    //Enable this to delete lambda_architecture keyspace
+    query = "DROP KEYSPACE IF EXISTS lambda_architecture;"
+    //Enable this to delete existing lambda_architecture keyspace
     session.execute(query)
 
     //Query to create lambda_architecture keyspace
     // Using 'replication_factor':1 if only run on local machine
-    query = "CREATE KEYSPACE lambda_architecture WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};"
+    query = "CREATE KEYSPACE IF NOT EXISTS lambda_architecture WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};"
     session.execute(query)
 
     //Connect to the lambda_architecture keyspace
@@ -38,7 +38,5 @@ object CassandraDB {
     //Stop the connection
     println("Keyspace and tables were created successfully.")
     cluster.close()
-
   }
-
 }

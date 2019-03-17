@@ -9,7 +9,7 @@ case object StartCassandra
 case object StartKafkaCassandra
 
 //Define Kafka actor
-class KafkaActor extends Actor{
+class EnvActor extends Actor{
   //Set the directory of Kafka and Cassandra
   val kafkaDir="/home/itechseeker/WorkSpace/ITechSeeker/Tools/kafka_2.12-2.1.0"
   val cassandraDir="/home/itechseeker/WorkSpace/ITechSeeker/Tools/apache-cassandra-3.11.4"
@@ -66,7 +66,7 @@ class KafkaActor extends Actor{
   }
 }
 
-object CmdRunner {
+object EnvRunner {
   def start(): Unit = {
     {
       //Creating an ActorSystem
@@ -75,10 +75,10 @@ object CmdRunner {
       //Create 4 actors to perform four different jobs parallel
       //Because actors always work sequentially.
       //We cannot force an actor to process more than one message at a time
-      val actor1 = actorSystem.actorOf(Props[KafkaActor])
-      val actor2 = actorSystem.actorOf(Props[KafkaActor])
-      val actor3 = actorSystem.actorOf(Props[KafkaActor])
-      val actor4 = actorSystem.actorOf(Props[KafkaActor])
+      val actor1 = actorSystem.actorOf(Props[EnvActor])
+      val actor2 = actorSystem.actorOf(Props[EnvActor])
+      val actor3 = actorSystem.actorOf(Props[EnvActor])
+      val actor4 = actorSystem.actorOf(Props[EnvActor])
 
       //Send message to each actor to ask them doing their job
       actor1 ! StartZookeeper
@@ -93,8 +93,6 @@ object CmdRunner {
 
       actor4 ! StartKafkaCassandra
       Thread.sleep(5000)
-
     }
   }
-
 }
