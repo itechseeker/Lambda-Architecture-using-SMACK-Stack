@@ -2,50 +2,56 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8b5b82b1-e308-4c8f-af5a-40743584ef77" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/scala/main_package/AppConfiguration.scala" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessingActor.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/data_collector/CassandraDB.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/data_collector/CassandraDB.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/data_collector/KafkaRunner.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/data_collector/CmdRunner.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/data_collector/KafkaTwitterStreaming.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/data_collector/KafkaTwitterStreaming.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/main_package/ClientUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main_package/ClientUI.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/main_package/ClientUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main_package/ClientUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/main_package/AppConfiguration.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main_package/AppConfiguration.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/scala/main_package/TestCode.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/main_package/TestCode.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/serving_layer/AkkaServer.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/serving_layer/AkkaServer.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessor.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessor.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessor.scala" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingActor$$anonfun$receive$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingActor$$anonfun$receive$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingActor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingActor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingSpark$$anonfun$hashtagAnalysis$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingSpark$$anonfun$hashtagAnalysis$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingSpark.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessingSpark.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessor$$anonfun$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessor$$anonfun$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessor$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/batch_layer/BatchProcessor$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/batch_layer/HashTagProcessing$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/batch_layer/HashTagProcessing$.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data_collector/CassandraDB$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/CassandraDB$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming$$anon$1$$anonfun$onStatus$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaActor$$anonfun$receive$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/KafkaActor$$anonfun$receive$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaActor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/KafkaActor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaRunner$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaRunner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming$$anon$1$$anonfun$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming$$anon$1$$anonfun$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming$$anon$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming$$anon$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming$.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/KafkaTwitterStreaming.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartCassandra$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartCassandra$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartCassandra.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartCassandra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaCassandra$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaCassandra$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaCassandra.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaCassandra.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaServer$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaServer$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartKafkaServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartZookeeper$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartZookeeper$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data_collector/StartZookeeper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/StartZookeeper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data_collector/Tweet$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/Tweet$.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data_collector/Tweet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data_collector/Tweet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/ClientUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/ClientUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/ClientUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/ClientUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/Hashtag.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/Hashtag.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main_package/AppConfiguration$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/AppConfiguration$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main_package/AppConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/AppConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main_package/LambdaSMACK$$anonfun$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main_package/LambdaSMACK$$anonfun$2$$anonfun$apply$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main_package/LambdaSMACK$$anonfun$2.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main_package/LambdaSMACK$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/LambdaSMACK$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/LambdaSMACK.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/LambdaSMACK.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/TestCode$$anonfun$main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/TestCode$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main_package/TestCode$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/TestCode$Hashtag$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main_package/TestCode$Hashtag$3$.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$1$$anonfun$apply$1$$anonfun$apply$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$1$$anonfun$apply$1$$anonfun$apply$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$1$$anonfun$apply$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$1$$anonfun$apply$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$getViews$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$getViews$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$getViews$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$getViews$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$getViews$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$getViews$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$$anonfun$main$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$Hashtag$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$Hashtag$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$Hashtag.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer$Hashtag.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/serving_layer/AkkaServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$$anonfun$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$$anonfun$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$$anonfun$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$$anonfun$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main_package/TestCode$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main_package/TestCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$$anonfun$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$$anonfun$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor$.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/speed_layer/RealtimeProcessor.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -58,65 +64,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/ClientUI.java">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="1364">
+              <caret line="68" column="83" selection-start-line="68" selection-start-column="83" selection-end-line="68" selection-end-column="83" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#21#66#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/ClientUI.form">
-          <provider selected="true" editor-type-id="ui-designer" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/TestCode.scala">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessingActor.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+            <state relative-caret-position="630">
+              <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
               <folding>
-                <element signature="e#22#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/KafkaTwitterStreaming.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="902">
-              <caret line="51" column="82" selection-start-line="51" selection-start-column="82" selection-end-line="51" selection-end-column="82" />
-              <folding>
-                <element signature="e#24#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessor.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
-              <folding>
-                <element signature="e#21#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-              <folding>
-                <element signature="e#22#70#0" expanded="true" />
+                <element signature="e#21#66#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,40 +90,33 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/CassandraDB.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+            <state relative-caret-position="748">
+              <caret line="34" column="60" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="60" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/AppConfiguration.scala">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="21" selection-start-line="20" selection-end-line="28" />
+            <state relative-caret-position="396">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/typesafe/akka/akka-actor_2.11/2.5.19/akka-actor_2.11-2.5.19.jar!/akka/actor/TypedCreatorFunctionConsumer.class">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/CmdRunner.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="4" selection-end-line="100" />
               <folding>
-                <element signature="e#22#62#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.conf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" column="7" selection-start-line="2" selection-end-line="2" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="57" column="63" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
-              <folding>
-                <element signature="e#21#66#0" expanded="true" />
+                <element signature="e#24#79#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -194,17 +152,19 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/scala/main_package/ConfigFile.conf" />
         <option value="$PROJECT_DIR$/src/main/scala/main_package/Configuration.scala" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.conf" />
-        <option value="$PROJECT_DIR$/src/main/scala/data_collector/CassandraDB.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/main_package/TestCode.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/main_package/AppConfiguration.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/serving_layer/AkkaServer.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/data_collector/KafkaTwitterStreaming.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/main_package/ClientUI.form" />
         <option value="$PROJECT_DIR$/src/main/scala/main_package/ClientUI.java" />
+        <option value="$PROJECT_DIR$/src/main/scala/data_collector/CmdRunner.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/data_collector/KafkaTwitterStreaming.scala" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.conf" />
+        <option value="$PROJECT_DIR$/src/main/scala/main_package/AppConfiguration.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/main_package/TestCode.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/data_collector/CassandraDB.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessor.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessingActor.scala" />
       </list>
     </option>
   </component>
@@ -220,9 +180,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="38" />
-    <option name="width" value="1609" />
+    <option name="x" value="297" />
+    <option name="y" value="219" />
+    <option name="width" value="1599" />
     <option name="height" value="743" />
   </component>
   <component name="ProjectView">
@@ -230,6 +190,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -268,7 +230,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="scala" type="462c0819:PsiDirectoryNode" />
-              <item name="main_package" type="462c0819:PsiDirectoryNode" />
+              <item name="batch_layer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Lambda Architecture" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lambda Architecture" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="data_collector" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Lambda Architecture" type="b2602c69:ProjectViewProjectNode" />
@@ -277,7 +247,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="scala" type="462c0819:PsiDirectoryNode" />
               <item name="main_package" type="462c0819:PsiDirectoryNode" />
-              <item name="ClientUI.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
               <item name="Lambda Architecture" type="b2602c69:ProjectViewProjectNode" />
@@ -287,17 +256,23 @@
               <item name="scala" type="462c0819:PsiDirectoryNode" />
               <item name="serving_layer" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Lambda Architecture" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lambda Architecture" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="speed_layer" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="550" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552578801888" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552796788866" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -329,52 +304,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClientUI">
-    <configuration name="AkkaServer" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="serving_layer.AkkaServer" />
-      <module name="Lambda Architecture" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="serving_layer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Runner">
     <configuration name="BatchProcessor" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="batch_layer.BatchProcessor" />
       <module name="Lambda Architecture" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="batch_layer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClientUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main_package.ClientUI" />
-      <module name="Lambda Architecture" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main_package.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="KafkaTwitterStreaming" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="data_collector.KafkaTwitterStreaming" />
-      <module name="Lambda Architecture" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="data_collector.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -395,20 +331,53 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RealtimeProcessor" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="speed_layer.RealtimeProcessor" />
+      <module name="Lambda Architecture" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="speed_layer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Runner" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="speed_layer.Runner" />
+      <module name="Lambda Architecture" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="speed_layer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCode (1)" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="TestCode" />
+      <module name="Lambda Architecture" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.AkkaServer" />
       <item itemvalue="Application.BatchProcessor" />
-      <item itemvalue="Application.ClientUI" />
-      <item itemvalue="Application.KafkaTwitterStreaming" />
       <item itemvalue="Application.LambdaSMACK" />
+      <item itemvalue="Application.RealtimeProcessor" />
+      <item itemvalue="Application.Runner" />
+      <item itemvalue="Application.TestCode (1)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientUI" />
-        <item itemvalue="Application.AkkaServer" />
-        <item itemvalue="Application.KafkaTwitterStreaming" />
+        <item itemvalue="Application.Runner" />
+        <item itemvalue="Application.RealtimeProcessor" />
         <item itemvalue="Application.LambdaSMACK" />
         <item itemvalue="Application.BatchProcessor" />
+        <item itemvalue="Application.TestCode (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -428,7 +397,7 @@
   <component name="ToolWindowManager">
     <frame x="67" y="38" width="1853" height="1042" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3557423" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.38991597" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -437,7 +406,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32908458" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.14947857" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19930474" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -445,9 +414,9 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32908458" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.38586327" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.30706838" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24985994" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
@@ -484,6 +453,10 @@
       <window_info anchor="right" id="Maven" order="7" weight="0.329972" />
     </layout-to-restore>
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/TwitterStreamApp.scala" />
     <entry file="file://$PROJECT_DIR$/src/main/java/KafkaTwitterStreaming.java" />
@@ -506,13 +479,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/ConfigFile.conf" />
-    <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/KafkaRunner.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="38" column="3" selection-start-line="38" selection-start-column="3" selection-end-line="38" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/serving_layer/AkkaServer.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -522,7 +488,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/ClientUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
+        <state relative-caret-position="968">
           <caret line="55" selection-start-line="55" selection-end-line="55" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -530,79 +496,89 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" selection-start-column="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/ClientUI.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/KafkaTwitterStreaming.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="51" column="82" selection-start-line="51" selection-start-column="82" selection-end-line="51" selection-end-column="82" />
-          <folding>
-            <element signature="e#24#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
-          <folding>
-            <element signature="e#21#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-          <folding>
-            <element signature="e#22#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/CassandraDB.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/AppConfiguration.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="21" selection-start-line="20" selection-end-line="28" />
+        <state relative-caret-position="462">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="e#22#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.conf">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/KafkaTwitterStreaming.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="7" selection-start-line="2" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="57" column="63" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
+        <state relative-caret-position="87">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
-            <element signature="e#21#66#0" expanded="true" />
+            <element signature="e#24#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/TestCode.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <state relative-caret-position="64">
+          <caret line="51" column="64" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="64" />
           <folding>
-            <element signature="e#22#41#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/batch_layer/BatchProcessor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1364">
+          <caret line="68" column="83" selection-start-line="68" selection-start-column="83" selection-end-line="68" selection-end-column="83" />
+          <folding>
+            <element signature="e#21#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/CassandraDB.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="34" column="60" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/main_package/LambdaSMACK.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/typesafe/akka/akka-actor_2.11/2.5.19/akka-actor_2.11-2.5.19.jar!/akka/actor/TypedCreatorFunctionConsumer.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/data_collector/CmdRunner.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="4" selection-end-line="100" />
+          <folding>
+            <element signature="e#24#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/speed_layer/RealtimeProcessingActor.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+          <folding>
+            <element signature="e#21#66#0" expanded="true" />
           </folding>
         </state>
       </provider>

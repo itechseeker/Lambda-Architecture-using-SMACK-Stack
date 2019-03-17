@@ -3,7 +3,6 @@ package data_collector
 import java.io.{File, InputStreamReader,BufferedReader}
 import akka.actor.{Actor, ActorSystem, Props}
 
-
 case object StartZookeeper
 case object StartKafkaServer
 case object StartCassandra
@@ -67,7 +66,7 @@ class KafkaActor extends Actor{
   }
 }
 
-object KafkaRunner {
+object CmdRunner {
   def start(): Unit = {
     {
       //Creating an ActorSystem
@@ -93,6 +92,7 @@ object KafkaRunner {
       Thread.sleep(5000)
 
       actor4 ! StartKafkaCassandra
+      Thread.sleep(5000)
 
     }
   }

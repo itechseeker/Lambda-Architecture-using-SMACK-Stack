@@ -2,9 +2,9 @@ package batch_layer
 
 import akka.actor.{Actor, ActorSystem, Props}
 import org.apache.spark.sql.functions.desc
-import com.datastax.spark.connector._
 import com.datastax.spark.connector.cql.CassandraConnector
-import org.apache.spark.sql.cassandra._
+import main_package.AppConfiguration
+import org.apache.spark.sql.SaveMode
 import scala.concurrent.duration._
 import org.apache.spark.sql.functions.lower
 
@@ -14,7 +14,7 @@ class BatchProcessingSpark{
     .builder()
     .master("local[*]")
     .config("spark.cassandra.connection.host", "localhost")
-    .appName("Implementation of Lambda architecture using SMACK stack")
+    .appName("Lambda architecture - Batch Processing")
     .getOrCreate()
 
   //Implicit methods available in Scala for converting common Scala objects into DataFrames
@@ -36,8 +36,8 @@ class BatchProcessingSpark{
 
     //Display some data of master_dataset
     println("Total number of rows: "+df.count())
-    println("First five row of Twitter's Data: ")
-    df.show(5)
+    println("First 15 rows of the DataFrame: ")
+    df.show(15)
 
     //Only select the hashtag column and convert it to lower case for counting
     var hashtag_df=df.select(lower($"hashtag"))
@@ -45,17 +45,17 @@ class BatchProcessingSpark{
     //Get the current time
     val current_time=System.currentTimeMillis()
 
-    //Set batch_interval = 3 hours
-    val batch_interval=3
+    // Set time to filter tweet (most recent tweet)
+    val tweetDuration=AppConfiguration.tweetDuration
 
     //Only analyse tweets posted in last three hours which have at least one hashtag
-    hashtag_df=hashtag_df.filter($"created_date">(current_time-batch_interval*60*60*1000) && $"hashtag".notEqual("null"))
+    hashtag_df=hashtag_df.filter($"created_date">(current_time-tweetDuration.toMillis) && $"hashtag".notEqual("null"))
 
     println("The first ten tweets containing hashtag: ")
     hashtag_df.show(10)
 
     //Split hashtags string into each individual hashtag
-    var hashtag_indv=hashtag_df.as[String].flatMap(_.split(", ")).filter($"value".notEqual(""))
+    var hashtag_indv=hashtag_df.as[String].flatMap(_.split(", "))
 
 
     println("The first ten hashtags: ")
@@ -63,22 +63,18 @@ class BatchProcessingSpark{
 
     //Count the occurance of each hashtag
     val hashtagCount=hashtag_indv.groupBy("value").count().sort(desc("count")).withColumnRenamed("value","hashtag")
-    println("The most ten popular hashtags: ")
+    println("The top ten popular hashtags: ")
     hashtagCount.show(10)
 
-    //Connect Spark to Cassandra and execute CQL statements from Spark applications
+    //Connect Spark to Cassandra to remove all existing data from hashtag_batchview table
     val connector = CassandraConnector(sparkContext.getConf)
+    connector.withSessionDo(session => session.execute("TRUNCATE lambda_architecture.hashtag_batchview"))
 
-    //Delete the hashtag_batchview of the previous batch processing
-    connector.withSessionDo(session => session.execute("DROP TABLE IF EXISTS lambda_architecture.hashtag_batchview"))
-
-    //Create a Cassandra Table from a Dataset
-    //Note: if the name contain upper case, Cassandra will put it inside a double quote
-    hashtagCount.createCassandraTable("lambda_architecture","hashtag_batchview")
-
-    //Using a format helper to save hashtagCount into a hashtag_batchview table
-    hashtagCount.write.cassandraFormat("hashtag_batchview","lambda_architecture").save()
-
+    //Save new data to hashtag_batchview table
+    hashtagCount.write.format("org.apache.spark.sql.cassandra")
+      .options(Map("keyspace"->"lambda_architecture","table"->"hashtag_batchview"))
+      .mode(SaveMode.Append)
+      .save()
   }
 
 }
@@ -112,8 +108,9 @@ object BatchProcessor {
     //Using akka scheduler to run the batch processing periodically
     import actorSystem.dispatcher
     val initialDelay = 100 milliseconds
-    val interval = 30 minutes //running batch processing after each 30 mins
-    val cancellable = actorSystem.scheduler.schedule(initialDelay,interval,batchActor,HashTagProcessing)
+    val batchInterval=AppConfiguration.batchInterval //running batch processing after each 30 mins
+
+    actorSystem.scheduler.schedule(initialDelay,batchInterval,batchActor,HashTagProcessing)
 
   }
 }

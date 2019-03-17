@@ -1,7 +1,6 @@
 package data_collector
 
 import java.util.Properties
-
 import main_package.AppConfiguration
 import net.liftweb.json.DefaultFormats
 import org.apache.kafka.clients.producer.Producer
@@ -25,7 +24,7 @@ case class Tweet(tweet_id:Long,
 
 object KafkaTwitterStreaming {
 
-  def main(args: Array[String]): Unit = {
+  def run(): Unit = {
     //The Kafka Topic
     val kafkaTopic = AppConfiguration.kafkaTopic
 
@@ -130,8 +129,6 @@ object KafkaTwitterStreaming {
   //Config the conection to Twitter
   def getTwitterConf():Configuration = {
     //Config Twitter API key to access Twitter API
-    //The String keys here are only examples and not valid.
-    //You need to use your own keys
     val cb = new ConfigurationBuilder()
     cb.setDebugEnabled(true)
       .setJSONStoreEnabled(true)

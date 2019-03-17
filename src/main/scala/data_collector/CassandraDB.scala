@@ -1,7 +1,6 @@
 package data_collector
 
-import com.datastax.driver.core.{Cluster, ResultSet, Row}
-
+import com.datastax.driver.core.Cluster
 
 object CassandraDB {
 
@@ -12,8 +11,8 @@ object CassandraDB {
     var session = cluster.connect
     var query=""
 
-    //Enable this to delete lambda_architecture keyspace
     query = "DROP KEYSPACE lambda_architecture;"
+    //Enable this to delete lambda_architecture keyspace
     session.execute(query)
 
     //Query to create lambda_architecture keyspace
